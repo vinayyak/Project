@@ -54,6 +54,12 @@
 			<version>8.0.29</version>
 		</dependency>
 
+		<!--		ThymeLeaf-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!--		ThymeLeaf-->
 
 		<!--		MySQL-->
 	</dependencies>

@@ -36,4 +36,25 @@ public class SalesServiceImpl implements SalesService {
     public Sales getSaleByID(long saleID) {
         return null;
     }
+
+    @Override
+    public List<Sales> findAllSalesByProductName(String productName) {
+        log.info("Starting to find all the sales by Product Name");
+        List<Sales> result = salesRepository.findAllByProductName(productName);
+        log.info("Finished finding all the Sales, Total record(s): {}", result.size());
+        return result;
+    }
+
+    @Override
+    public List<Sales> findAllSalesByCategory(String category) {
+        Category filteringCategory = Category.findByString(category);
+        if (filteringCategory == null) {
+            throw new RuntimeException("Category is invalid!");
+        } else {
+            log.info("Starting to find all the sales by Category");
+            List<Sales> result = salesRepository.findAllByCategory(filteringCategory);
+            log.info("Finished finding all the Category, Total record(s): {}", result.size());
+            return result;
+        }
+    }
 }

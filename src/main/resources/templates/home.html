@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+</head>
+
+<body class="container">
+<h1>Home Page</h1><br>
+
+<div class="container">
+
+    <h2 style="color: green">Sales Report</h2>
+
+
+    <!--    List Sales-->
+    <table border="2px solid gray" style="margin: 3px; padding: 3px">
+        <thead style="text-align: center">
+        <td>Order ID</td>
+        <td>Order Date</td>
+        <td>Ship Date</td>
+        <td>Product Name</td>
+        </thead>
+
+        <tbody>
+        <th:block th:each="sale : ${saleList}">
+            <tr>
+                <td style="padding: 5px" th:text="${sale.getOrderID()}"></td>
+                <td style="padding: 5px" th:text="${sale.getOrderDate()}"></td>
+                <td style="padding: 5px" th:text="${sale.getShipDate()}"></td>
+                <td style="padding: 5px" th:text="${sale.getProductName()}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <!--    List Sales-->
+
+</div>
+</body>
+</html>

@@ -11,4 +11,7 @@ public interface SalesService {
     List<Sales> findAllSalesByCategory(Category category);
 
     Sales getSaleByID(long saleID);
+
+    List<Sales> findAllSalesByProductName(String productName);
+    List<Sales> findAllSalesByCategory(String category);
 }
