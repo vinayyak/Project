@@ -31,5 +31,32 @@ public class SalesController {
     public ResponseEntity<List<Sales>> findAllByCategory(
             @RequestParam("category") String category) {
         return new ResponseEntity<>(salesService.findAllSalesByCategory(category), HttpStatus.OK);
+
     }
+          /*New*/
+    @GetMapping("/all/region")
+    public  ResponseEntity<List<Sales>> findAllByRegion(
+            @RequestParam("region") String region) {
+        return new ResponseEntity<>(salesService.findAllSalesByRegion(region), HttpStatus.OK);
+    }
+
+    @GetMapping("/all/segment")
+    public  ResponseEntity<List<Sales>> findAllBySegment(
+            @RequestParam("segment") String segment) {
+        return new ResponseEntity<>(salesService.findAllSalesBySegment(segment), HttpStatus.OK);
+    }
+
+    @GetMapping("/all/customer-name")
+    public  ResponseEntity<List<Sales>> findAllByCustomerName(
+            @RequestParam("customerName") String customerName) {
+        return new ResponseEntity<>(salesService.findAllSalesByCustomerName(customerName), HttpStatus.OK);
+    }
+
+    @GetMapping("/all/city")
+    public  ResponseEntity<List<Sales>> findAllByCity(
+            @RequestParam("city") String city) {
+        return new ResponseEntity<>(salesService.findAllSalesByCity(city), HttpStatus.OK);
+    }
+
 }
+

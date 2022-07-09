@@ -35,4 +35,12 @@ public class MVCSalesController {
     public String helloHcl(Model model) {
         return "company/hcl";
     }
+
+    /*New*/
+
+    @GetMapping("/city")
+    public String city(Model model) {
+        model.addAttribute("saleList", salesService.findAllSalesByCity("Los Angeles"));
+        return "city";
+    }
 }

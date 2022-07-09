@@ -14,4 +14,11 @@ public interface SalesService {
 
     List<Sales> findAllSalesByProductName(String productName);
     List<Sales> findAllSalesByCategory(String category);
+
+    /*New*/
+    List<Sales> findAllSalesByRegion(String region);
+    List<Sales> findAllSalesBySegment(String segment);
+    List<Sales> findAllSalesByCustomerName(String customerName);
+    List<Sales> findAllSalesByCity(String city);
+
 }
