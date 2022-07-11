@@ -1,17 +1,22 @@
 package com.vinni.service.implement;
 
+import antlr.StringUtils;
 import com.vinni.constant.Category;
 import com.vinni.constant.Region;
 import com.vinni.constant.Segment;
+import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.Sales;
 import com.vinni.repository.SalesRepository;
+import com.vinni.service.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import com.vinni.service.SalesService;
 
-
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 @Component
@@ -62,6 +67,7 @@ public class SalesServiceImpl implements SalesService {
 
         }
     }
+
     /*New*/
     @Override
     public List<Sales> findAllSalesByRegion(String region) {
@@ -108,4 +114,61 @@ public class SalesServiceImpl implements SalesService {
         log.info("Finished finding all the Sales, Total record(s): {}", result.size());
         return result;
     }
+
+    @Override
+    public List<Sales> findSalesByFiltering(SaleFilterRequestDTO filter) {
+        log.info("Starting to filter all the Sales with criteria: Product name: {}, Segment: {}, Category: {}, " +
+                        "Customer name: {}, Country : {}, City: {}, State: {}, Region: {}, Order Date: ({} - {})," +
+                        " Ship Date: ({} - {})",
+                filter.getProductName(),
+                filter.getSegment(),
+                filter.getCategory(),
+                filter.getCustomerName(),
+                filter.getCountry(),
+                filter.getCity(),
+                filter.getState(),
+                filter.getRegion(),
+                filter.getOrderDateFrom(),
+                filter.getOrderDateTo(),
+                filter.getShipDateFrom(),
+                filter.getShipDateTo());
+        // Validate the Enums
+        Segment filteringSegment = Segment.findByString(filter.getSegment());
+        Category filteringCategory = Category.findByString(filter.getCategory());
+        Region filteringRegion = Region.findByString(filter.getRegion());
+
+        // TODO: Filter by CustomerName, Country, City, State, Region, Order Date, ShipDate
+        List<Sales> result = salesRepository.findSalesByFiltering(
+                Strings.isBlank(filter.getProductName()) ? null : filter.getProductName(),
+                filteringSegment,
+                filteringCategory,
+                Strings.isBlank(filter.getCustomerName()) ? null : filter.getCustomerName(),
+                Strings.isBlank(filter.getCountry()) ? null : filter.getCountry(),
+                Strings.isBlank(filter.getCity()) ? null : filter.getCity(),
+                Strings.isBlank(filter.getState()) ? null : filter.getState(),
+                filteringRegion,
+                filter.getOrderDateFrom(),
+                filter.getOrderDateTo(),
+                filter.getShipDateFrom(),
+                filter.getShipDateTo());
+        log.info("Finished filtering all the Sales, Total record(s): {}", result.size());
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public void coverDB() {
+        List<Sales> allSales = salesRepository.findAllSales();
+        LocalDate startDate = LocalDate.of(2020, Month.JANUARY, 1);
+        int plusDate = 0;
+        for (Sales s : allSales) {
+            plusDate += 5;
+            s.setOrderDate(startDate.plusDays(plusDate));
+            s.setShipDate(startDate.plusDays(plusDate + 6));
+        }
+        salesRepository.saveAll(allSales);
+        log.info("Done Cover DB");
+    }
+
+
 }

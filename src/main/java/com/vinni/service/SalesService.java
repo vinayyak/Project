@@ -1,6 +1,7 @@
 package com.vinni.service;
 
 import com.vinni.constant.Category;
+import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.Sales;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface SalesService {
     List<Sales> findAllSalesByCustomerName(String customerName);
     List<Sales> findAllSalesByCity(String city);
 
+    List<Sales> findSalesByFiltering(SaleFilterRequestDTO filter);
+
+    void coverDB();
 }

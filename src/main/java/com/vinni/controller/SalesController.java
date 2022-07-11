@@ -1,5 +1,6 @@
 package com.vinni.controller;
 
+import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.Sales;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,40 +24,53 @@ public class SalesController {
 
     @GetMapping("/all/product-name")
     public ResponseEntity<List<Sales>> findAllByProductName(
-            @RequestParam("productName") String productName) {
+            @RequestParam(name = "productName", required = false) String productName) {
         return new ResponseEntity<>(salesService.findAllSalesByProductName(productName), HttpStatus.OK);
     }
 
     @GetMapping("/all/category")
     public ResponseEntity<List<Sales>> findAllByCategory(
-            @RequestParam("category") String category) {
+            @RequestParam(name = "category", required = false) String category) {
         return new ResponseEntity<>(salesService.findAllSalesByCategory(category), HttpStatus.OK);
 
     }
-          /*New*/
+
+    /*New*/
     @GetMapping("/all/region")
-    public  ResponseEntity<List<Sales>> findAllByRegion(
+    public ResponseEntity<List<Sales>> findAllByRegion(
             @RequestParam("region") String region) {
         return new ResponseEntity<>(salesService.findAllSalesByRegion(region), HttpStatus.OK);
     }
 
     @GetMapping("/all/segment")
-    public  ResponseEntity<List<Sales>> findAllBySegment(
+    public ResponseEntity<List<Sales>> findAllBySegment(
             @RequestParam("segment") String segment) {
         return new ResponseEntity<>(salesService.findAllSalesBySegment(segment), HttpStatus.OK);
     }
 
     @GetMapping("/all/customer-name")
-    public  ResponseEntity<List<Sales>> findAllByCustomerName(
+    public ResponseEntity<List<Sales>> findAllByCustomerName(
             @RequestParam("customerName") String customerName) {
         return new ResponseEntity<>(salesService.findAllSalesByCustomerName(customerName), HttpStatus.OK);
     }
 
     @GetMapping("/all/city")
-    public  ResponseEntity<List<Sales>> findAllByCity(
+    public ResponseEntity<List<Sales>> findAllByCity(
             @RequestParam("city") String city) {
         return new ResponseEntity<>(salesService.findAllSalesByCity(city), HttpStatus.OK);
     }
+
+    @PostMapping("/all/filter")
+    public ResponseEntity<List<Sales>> findAllByFilter(
+            @RequestBody SaleFilterRequestDTO filterRequestDTO) {
+        return new ResponseEntity<>(salesService.findSalesByFiltering(filterRequestDTO), HttpStatus.OK);
+    }
+
+//    @Deprecated
+//    @GetMapping("/all/cover")
+//    public void cover() {
+//        salesService.coverDB();
+//    }
 
 }
 

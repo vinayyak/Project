@@ -8,8 +8,31 @@
 </head>
 
 <body class="container">
-<h1>Home Page</h1><br>
+<!--<h1>Home Page</h1>-->
+<h1>Sales Report</h1><br>
+<div th:if="${saleFilterRequestDTO != null}">
+    <div style="color: green">Sales filter result</div>
+</div>
 
+<form action="#" th:action="@{/filter}" th:object="${saleFilterRequestDTO}" method="post">
+    <p>Product Name: <input type="text" th:field="*{productName}"/></p>
+    <p>Segment: <input type="text" th:field="*{segment}"/></p>
+    <p>Category: <input type="text" th:field="*{category}"/></p>
+    <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
+    <p>Country: <input type="text" th:field="*{country}"/></p>
+    <p>City: <input type="text" th:field="*{city}"/></p>
+    <p>State: <input type="text" th:field="*{state}"/></p>
+    <p>Region: <input type="text" th:field="*{region}"/></p>
+    <p>Order Date From: <input type="text" th:field="*{orderDateFrom}"/></p>
+    <p>Order Date To: <input type="text" th:field="*{orderDateTo}"/></p>
+    <p>Ship Date From: <input type="text" th:field="*{shipDateFrom}"/></p>
+    <p>Ship Date To: <input type="text" th:field="*{shipDateTo}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+
+    <div class="form-group">
+        <button class="btn btn-success" type="submit">Filter Sales</button>
+    </div>
+</form>
 <div class="container">
 
     <h2 style="color: green">Sales Report</h2>
@@ -43,7 +66,6 @@
         </th:block>
         </tbody>
     </table>
-    <!--    List Sales-->
 
 </div>
 </body>

@@ -34,11 +34,11 @@ public class Sales {
 
     @Column(name = "ORDER_DATE")
 //    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String OrderDate;
+    private LocalDate orderDate;
 
     @Column(name = "SHIP_DATE")
 //    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String ShipDate;
+    private LocalDate shipDate;
 
     @Column(name = "SHIP_MODE")
     @Convert(converter = ShipModeConverter.class)

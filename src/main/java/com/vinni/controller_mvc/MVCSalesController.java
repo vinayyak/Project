@@ -1,10 +1,13 @@
 package com.vinni.controller_mvc;
 
+import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.service.SalesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/")
@@ -22,25 +25,20 @@ public class MVCSalesController {
 
     @GetMapping("/home")
     public String home(Model model) {
-        model.addAttribute("saleList", salesService.findAllSalesByProductName("phone"));
+        if (!model.containsAttribute("saleList")) {
+            model.addAttribute("saleList", salesService.findAllSales());
+        }
+
+        if (!model.containsAttribute("saleFilterRequestDTO")) {
+            model.addAttribute("saleFilterRequestDTO", new SaleFilterRequestDTO());
+        }
         return "home";
     }
 
-    @GetMapping("/vinni")
-    public String helloVinni(Model model) {
-        return "vinni";
+    @PostMapping("/filter")
+    public String filter(Model model, @ModelAttribute("saleFilterRequestDTO") SaleFilterRequestDTO saleFilterRequestDTO) {
+        model.addAttribute("saleList", salesService.findSalesByFiltering(saleFilterRequestDTO));
+        return "home";
     }
 
-    @GetMapping("/company/hcl")
-    public String helloHcl(Model model) {
-        return "company/hcl";
-    }
-
-    /*New*/
-
-    @GetMapping("/city")
-    public String city(Model model) {
-        model.addAttribute("saleList", salesService.findAllSalesByCity("Los Angeles"));
-        return "city";
-    }
 }
