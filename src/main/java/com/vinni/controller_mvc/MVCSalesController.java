@@ -5,10 +5,7 @@ import com.vinni.service.SalesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @Controller
@@ -35,10 +32,13 @@ public class MVCSalesController {
         return "home";
     }
 
-    @PostMapping("/filter")
-    public String filter(Model model, @ModelAttribute("saleFilterRequestDTO") SaleFilterRequestDTO saleFilterRequestDTO) {
-        model.addAttribute("saleList", salesService.findSalesByFiltering(saleFilterRequestDTO));
+    @PostMapping(value = "/filter")
+    public String filter(Model model, @ModelAttribute("saleFilterRequestDTO") SaleFilterRequestDTO saleFilterRequestDTO,
+                         @RequestParam(value = "action") String action) {
+        if ("filter".equalsIgnoreCase(action))
+            model.addAttribute("saleList", salesService.findSalesByFiltering(saleFilterRequestDTO));
+        else
+            model.addAttribute("saleList", salesService.findAllSales());
         return "home";
     }
-
 }

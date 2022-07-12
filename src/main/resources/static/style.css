@@ -7,19 +7,20 @@ h2{
 }
 p{
     font-family: Georgia;
-
-    background-color: peachpuff;
+    margin-top: 0px;
+    margin-bottom: 0rem;
+    background-color: transparent;
     color: black;
-    border-radius: 20px;
+    border-radius: 0px;
     box-sizing: border-box;
     padding: 12px;
 }
 
-button1 {
+button {
     margin-top: 15px;
 }
-body{
-    background-color: cornflowerblue;
+.body{
+    background-image: url("bg1.jpg");
     padding: 15px;
     margin: 0;
 }
@@ -37,9 +38,19 @@ input[type=submit] {
     background-color: forestgreen ;
     color: whitesmoke;
     outline-color: lightgray;
+
+
+}
+.container {
+    background-color: whitesmoke;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 form{
-    background-color: peachpuff;
+    background: transparent;
     color: black;
     border-radius: 20px;
     box-sizing: border-box;
@@ -58,6 +69,9 @@ form{
     -webkit-column-gap: 40px;
     -moz-column-gap: 40x;
     column-gap: 40px;
+    column-rule-color: peachpuff;
+    -webkit-column-rule-color: peachpuff;
+    -moz-column-rule-color: peachpuff;
 }
 .sub-entry {
     width: 50%;

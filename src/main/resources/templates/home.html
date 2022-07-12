@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link th:href="@{/style.css}" rel="stylesheet">
+
+
     <style>
         body {
-            background-image: url('background2.jpg');
+            background-image: url('bg1.jpg');
         }
     </style>
 </head>
@@ -19,23 +21,57 @@
 <div th:if="${saleFilterRequestDTO != null}">
     <div style="color: green">Sales filter result</div>
 </div>
+<br>
 <form action="#" th:action="@{/filter}" th:object="${saleFilterRequestDTO}" method="post">
-    <p>Product Name: <input type="text" th:field="*{productName} "/></p>
-    <p>Segment: <input type="text" th:field="*{segment}"/></p>
-    <p>Category: <input type="text" th:field="*{category}"/></p>
-    <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
-    <p>Country: <input type="text" th:field="*{country}"/></p>
-    <p>City: <input type="text" th:field="*{city}"/></p>
-    <p>State: <input type="text" th:field="*{state}"/></p>
-    <p>Region: <input type="text" th:field="*{region}"/></p>
+
+
+        <p>Product Name: <input type="text" th:field="*{productName} "/></p>
+
+      <p>Segment:
+        <select th:field="*{segment}">
+            <option th:each="segment : ${T(com.vinni.constant.Segment).values()} "
+                    th:value="${segment}"
+                    th:text="${segment}">
+            </option>
+        </select>
+      </p>
+
+      <p>Category:
+        <select th:field="*{category}">
+          <option th:each="category : ${T(com.vinni.constant.Category).values()} "
+                th:value="${category}"
+                th:text="${category}">
+          </option>
+       </select>
+      </p>
+
+
+      <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
+      <p>Country: <input type="text" th:field="*{country}"/></p>
+      <p>City: <input type="text" th:field="*{city}"/></p>
+
+      <p>State: <input type="text" th:field="*{state}"/></p>
+      <p>Region:
+       <select th:field="*{region}">
+         <option th:each="region : ${T(com.vinni.constant.Region).values()} "
+                th:value="${region}"
+                th:text="${region}">
+         </option>
+       </select>
+      </p>
+
     <p>Order Date From: <input type="text" th:field="*{orderDateFrom}"/></p>
     <p>Order Date To: <input type="text" th:field="*{orderDateTo}"/></p>
     <p>Ship Date From: <input type="text" th:field="*{shipDateFrom}"/></p>
     <p>Ship Date To: <input type="text" th:field="*{shipDateTo}"/></p>
 
     <div class="form-group">
-        <button class="btn btn-success" type="submit">Filter Sales</button>
+        <br> </br>
+<!--        <input type="reset" value="Reset">-->
+        <button class="btn btn-success" type="submit" name="action" value="filter">Filter Sales</button>
+        <button class="btn btn-danger" type="submit" name="action" value="reset">Reset</button>
     </div>
+
 </form>
 
 <br>

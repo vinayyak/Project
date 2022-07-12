@@ -3,6 +3,7 @@ package com.vinni.constant;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Segment {
+    None(""),
     CONSUMER("Consumer"),
     CORPORATE("Corporate"),
     HOME_OFFICE("Home Office");

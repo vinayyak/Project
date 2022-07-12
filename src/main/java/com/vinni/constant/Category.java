@@ -3,6 +3,7 @@ package com.vinni.constant;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Category {
+    None(""),
     FURNITURE("Furniture"),
     OFFICE_SUPPLIES("Office Supplies"),
     TECHNOLOGY("Technology");

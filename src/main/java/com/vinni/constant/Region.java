@@ -3,6 +3,7 @@ package com.vinni.constant;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Region {
+    None(""),
     SOUTH("South"),
     WEST("West"),
     CENTRAL("Central"),
@@ -25,5 +26,7 @@ public enum Region {
     public String getValue() {
         return this.value;
     }
-}
+
+    }
+
 
