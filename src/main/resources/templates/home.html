@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('background2.jpg');
+        }
+    </style>
 </head>
 
 <body class="container">
@@ -13,9 +19,8 @@
 <div th:if="${saleFilterRequestDTO != null}">
     <div style="color: green">Sales filter result</div>
 </div>
-
 <form action="#" th:action="@{/filter}" th:object="${saleFilterRequestDTO}" method="post">
-    <p>Product Name: <input type="text" th:field="*{productName}"/></p>
+    <p>Product Name: <input type="text" th:field="*{productName} "/></p>
     <p>Segment: <input type="text" th:field="*{segment}"/></p>
     <p>Category: <input type="text" th:field="*{category}"/></p>
     <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
@@ -27,33 +32,37 @@
     <p>Order Date To: <input type="text" th:field="*{orderDateTo}"/></p>
     <p>Ship Date From: <input type="text" th:field="*{shipDateFrom}"/></p>
     <p>Ship Date To: <input type="text" th:field="*{shipDateTo}"/></p>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 
     <div class="form-group">
         <button class="btn btn-success" type="submit">Filter Sales</button>
     </div>
 </form>
+
+<br>
+<br>
 <div class="container">
 
-    <h2 style="color: green">Sales Report</h2>
-
+    <h2 style="color: green">Filtered Sales Reports: <span th:text="${saleList.size()}"></span> result(s)</h2>
 
     <!--    List Sales-->
-    <table border="2px solid gray" style="margin: 3px; padding: 3px">
-        <thead style="text-align: center">
-        <td>Order ID</td>
-        <td>Order Date</td>
-        <td>Ship Date</td>
-        <td>Product Name</td>
-        <td>Region</td>
-        <td>Segment</td>
-        <td>Customer Name</td>
-        <td>City</td>
+    <!--    <table border="2px solid gray" style="margin: 3px; padding: 3px">-->
+    <table class="table">
+        <thead class="thead-dark">
+        <tr style="text-align: center">
+            <th>Order ID</th>
+            <th style="width: 110px">Order Date</th>
+            <th style="width: 110px">Ship Date</th>
+            <th style="width: 300px">Product Name</th>
+            <th>Region</th>
+            <th>Segment</th>
+            <th>Customer Name</th>
+            <th>City</th>
+        </tr>
         </thead>
 
         <tbody>
-        <th:block th:each="sale : ${saleList}">
-            <tr>
+        <th:block th:each="sale, rowStat : ${saleList}">
+            <tr th:style="${rowStat.odd} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
                 <td style="padding: 5px" th:text="${sale.getOrderID()}"></td>
                 <td style="padding: 5px" th:text="${sale.getOrderDate()}"></td>
                 <td style="padding: 5px" th:text="${sale.getShipDate()}"></td>

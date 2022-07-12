@@ -3,6 +3,7 @@ package com.vinni.controller_mvc.request;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -18,11 +19,16 @@ public class SaleFilterRequestDTO {
     private String state = null;
     private String region = null;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate orderDateFrom;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate orderDateTo;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate shipDateFrom;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate shipDateTo;
 
 }

@@ -1,0 +1,79 @@
+h1{
+    font-family: Georgia;
+    color: red;
+}
+h2{
+    font-family: Georgia;
+}
+p{
+    font-family: Georgia;
+
+    background-color: peachpuff;
+    color: black;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+button1 {
+    margin-top: 15px;
+}
+body{
+    background-color: cornflowerblue;
+    padding: 15px;
+    margin: 0;
+}
+input[type=text] {
+    background-color: snow;
+    color: black;
+    border-radius: 20px;
+    outline-color: indianred;
+    padding-left: 10px;
+}
+input[type=submit] {
+    margin-right: 10px;
+    border-radius: 15px;
+    border-color: transparent;
+    background-color: forestgreen ;
+    color: whitesmoke;
+    outline-color: lightgray;
+}
+form{
+    background-color: peachpuff;
+    color: black;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 500px;
+    padding: 20px;
+    width: 320px;
+    outline-style: initial;
+    outline-color: gray;
+    font-family: Arial;
+    font-size: 20px;
+    text-align: left;
+    line-height: 35px;
+    -webkit-columns: 250px 2;
+    -moz-columns: 250px 2;
+    colums: 250px 2;
+    -webkit-column-gap: 40px;
+    -moz-column-gap: 40x;
+    column-gap: 40px;
+}
+.sub-entry {
+    width: 50%;
+    float: left;
+}
+.button {
+    color: forestgreen ;
+    text-align: center;
+    padding-top: 20px;
+    clear: both;
+}
+table{
+    background-color: whitesmoke;
+}
+
+th{
+    text-align: center;
+    vertical-align: center;
+}
