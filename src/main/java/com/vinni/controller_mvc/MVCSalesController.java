@@ -41,4 +41,9 @@ public class MVCSalesController {
             model.addAttribute("saleList", salesService.findAllSales());
         return "home";
     }
+
+    private void validateStates(Model model){
+        //TODO: Add the states and cities to the Model Map<String, Set<String>>
+        // User this method in wherever places that needs the relationship for filtering
+    }
 }

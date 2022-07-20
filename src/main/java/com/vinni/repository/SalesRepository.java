@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Repository
 public interface SalesRepository extends JpaRepository<Sales, Long> {
@@ -64,9 +66,12 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
                                      @Param("orderDateTo")LocalDate orderDateTo,
                                      @Param("shipDateFrom")LocalDate shipDateFrom,
                                      @Param("shipDateTo")LocalDate shipDateTo
-                                     )
+                                     );
 
-            ;
-
+    @Query("SELECT s FROM StateCity s")
+    Map<String, Set<String>> retrieveAllStatesAndCities(@Param("idSC") int idSC,
+                                                        @Param("stateID") String stateID,
+                                                        @Param("cityID") String cityID
+                                                        );
 
 }

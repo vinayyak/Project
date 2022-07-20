@@ -6,7 +6,9 @@ import com.vinni.constant.Region;
 import com.vinni.constant.Segment;
 import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.Sales;
+import com.vinni.entity.StateCity;
 import com.vinni.repository.SalesRepository;
+import com.vinni.repository.StateCityRepository;
 import com.vinni.service.SalesService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +19,10 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Component
 @Service
@@ -25,6 +30,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SalesServiceImpl implements SalesService {
     private final SalesRepository salesRepository;
+    private final StateCityRepository stateCityRepository;
 
     @Override
     public List<Sales> findAllSales() {
@@ -137,7 +143,7 @@ public class SalesServiceImpl implements SalesService {
         Category filteringCategory = Category.findByString(filter.getCategory());
         Region filteringRegion = Region.findByString(filter.getRegion());
 
-        // TODO: Filter by CustomerName, Country, City, State, Region, Order Date, ShipDate
+
         List<Sales> result = salesRepository.findSalesByFiltering(
                 Strings.isBlank(filter.getProductName()) ? null : filter.getProductName(),
                 filteringSegment,
@@ -170,5 +176,28 @@ public class SalesServiceImpl implements SalesService {
         log.info("Done Cover DB");
     }
 
+    @Override
+    public Map<String, Set<String>> retrieveAllStatesAndCities() {
+        Map<String, Set<String>> statesAndCities = new HashMap<>();
+        // QUERY all the State_City
+        List<StateCity> allStateCity = stateCityRepository.findAllStateCity();
+        // TODO: Iterate thru the results -> put to a map
+        for (StateCity item : allStateCity) {
+            statesAndCities.merge(
+                    item.getState().getState(), // Key
+                    Set.of(item.getCity().getCity()), // Value
+                    (oldSet, newSet) -> {     // Mapping function to deal with old values
+                        oldSet.addAll(newSet);
+                        return oldSet;
+                    });
+        }
 
+        // print test
+        for (String state : statesAndCities.keySet()) {
+            System.out.println("State: " + state);
+            System.out.println("Cities: " + statesAndCities.get(state));
+        }
+
+        return statesAndCities;
+    }
 }

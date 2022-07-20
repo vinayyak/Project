@@ -47,10 +47,10 @@
 
 
       <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
-      <p>Country: <input type="text" th:field="*{country}"/></p>
-      <p>City: <input type="text" th:field="*{city}"/></p>
+<!--      <p>Country: <input type="text" th:field="*{country}"/></p>-->
 
       <p>State: <input type="text" th:field="*{state}"/></p>
+      <p>City: <input type="text" th:field="*{city}"/></p>
       <p>Region:
        <select th:field="*{region}">
          <option th:each="region : ${T(com.vinni.constant.Region).values()} "
