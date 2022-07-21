@@ -2,6 +2,7 @@ package com.vinni.controller;
 
 import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.Sales;
+import com.vinni.service.StateService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 public class SalesController {
 
     private final SalesService salesService;
+
 
     @GetMapping("/all")
     public ResponseEntity<List<Sales>> findAll() {

@@ -30,7 +30,6 @@ public interface SalesService {
 
     void coverDB();
 
-    Map<String, Set<String>> retrieveAllStatesAndCities();
 
 
 }

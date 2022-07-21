@@ -68,10 +68,10 @@ public interface SalesRepository extends JpaRepository<Sales, Long> {
                                      @Param("shipDateTo")LocalDate shipDateTo
                                      );
 
-    @Query("SELECT s FROM StateCity s")
-    Map<String, Set<String>> retrieveAllStatesAndCities(@Param("idSC") int idSC,
-                                                        @Param("stateID") String stateID,
-                                                        @Param("cityID") String cityID
-                                                        );
+//    @Query("SELECT s FROM StateCity s")
+//    Map<String, Set<String>> retrieveAllStatesAndCities(@Param("idSC") int idSC,
+//                                                        @Param("stateID") String stateID,
+//                                                        @Param("cityID") String cityID
+//                                                        );
 
 }

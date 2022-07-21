@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name = "SALES")
+@Table(name = "SALE")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,10 +26,10 @@ public class Sales {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ROW_ID", unique = true)
+    @Column(name = "ROW_NO", unique = true)
     private int RowID;
 
-    @Column(name = "ORDER_ID")
+    @Column(name = "ORDER_NO")
     private String OrderID;
 
     @Column(name = "ORDER_DATE")
@@ -44,7 +44,7 @@ public class Sales {
     @Convert(converter = ShipModeConverter.class)
     private ShipMode shipMode;
 
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CUSTOMER_NO")
     private String customerId;
 
     @Column(name = "CUSTOMER_NAME")
@@ -71,7 +71,7 @@ public class Sales {
     @Convert(converter = RegionConverter.class)
     private Region region;
 
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "PRODUCT_NO")
     private String productID;
 
     //    @Enumerated(EnumType.STRING)
