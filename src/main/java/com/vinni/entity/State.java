@@ -26,5 +26,7 @@ public class State {
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
     private Set<City> cities;
 
-
+    public Set<City> getCities() {
+        return cities;
+    }
 }
