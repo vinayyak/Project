@@ -7,7 +7,8 @@
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <link th:href="@{/style.css}" rel="stylesheet">
 
-
+    <!--    <script src="${pageContext.request.contextPath }/resources/js/jquery-1.7.1.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         body {
             background-image: url('bg1.jpg');
@@ -25,61 +26,66 @@
 <form action="#" th:action="@{/filter}" th:object="${saleFilterRequestDTO}" method="post">
 
 
-        <p>Product Name: <input type="text" th:field="*{productName} "/></p>
+    <p>Product Name: <input type="text" th:field="*{productName} "/></p>
 
-      <p>Segment:
+    <p>Segment:
         <select th:field="*{segment}">
             <option th:each="segment : ${T(com.vinni.constant.Segment).values()} "
                     th:value="${segment}"
                     th:text="${segment}">
             </option>
         </select>
-      </p>
+    </p>
 
-      <p>Category:
+    <p>Category:
         <select th:field="*{category}">
-          <option th:each="category : ${T(com.vinni.constant.Category).values()} "
-                th:value="${category}"
-                th:text="${category}">
-          </option>
-       </select>
-      </p>
-
-
-      <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
-<!--      <p>Country: <input type="text" th:field="*{country}"/></p>-->
-
-
-
-
-    <p>State:
-<!--        <input type="text" th:field="*{state}"/>-->
-     <table>
-
-       <span th:each="state : ${stateList}">
-          <td>
-              <tr th:each="state : ${state.getCities()}">
-                 <p th:text="${state}"></p>
-              </tr>
-          <td>
-       </span>
-     </table>
+            <option th:each="category : ${T(com.vinni.constant.Category).values()} "
+                    th:value="${category}"
+                    th:text="${category}">
+            </option>
+        </select>
     </p>
 
 
-      <p>City: <input type="text" th:field="*{city}"/></p>
+    <p>Customer Name: <input type="text" th:field="*{customerName}"/></p>
 
 
+    <!--    State select-->
+<!--    <span th:each="state : ${stateList}">-->
+<!--          <td>-->
+<!--              <tr th:each="state : ${state.getCities()}">-->
+<!--                 <p th:text="${state}"></p>-->
+<!--              </tr>-->
+<!--          <td>-->
+<!--       </span>-->
+
+    State:
+    <select id="selectedState" th:field="*{state}">
+        <option th:each="state : ${stateList}"
+                th:text="${state.getStateName()}"
+                th:value="${state.getStateNo()}"></option>
+    </select>
+    <!--    State select-->
+
+<!--    City:-->
+<!--    <select id="selectedState" th:field="*{state}">-->
+<!--        &lt;!&ndash;/*@thymesVar id="getCityName" type=""*/&ndash;&gt;-->
+<!--        <option th:each="city : ${stateList}"-->
+<!--                th:text="${.getCityName()}"-->
+<!--                th:value="${city.getCityNo}"></option>-->
+<!--    </select>-->
+
+<!--    <p>City: <input type="text" th:field="*{city}"/></p>-->
 
 
-      <p>Region:
-       <select th:field="*{region}">
-         <option th:each="region : ${T(com.vinni.constant.Region).values()} "
-                th:value="${region}"
-                th:text="${region}">
-         </option>
-       </select>
-      </p>
+    <p>Region:
+        <select th:field="*{region}">
+            <option th:each="region : ${T(com.vinni.constant.Region).values()} "
+                    th:value="${region}"
+                    th:text="${region}">
+            </option>
+        </select>
+    </p>
 
     <p>Order Date From: <input type="text" th:field="*{orderDateFrom}"/></p>
     <p>Order Date To: <input type="text" th:field="*{orderDateTo}"/></p>
@@ -88,7 +94,7 @@
 
     <div class="form-group">
         <br> </br>
-<!--        <input type="reset" value="Reset">-->
+        <!--        <input type="reset" value="Reset">-->
         <button class="btn btn-success" type="submit" name="action" value="filter">Filter Sales</button>
         <button class="btn btn-danger" type="submit" name="action" value="reset">Reset</button>
     </div>
@@ -134,5 +140,7 @@
     </table>
 
 </div>
+
+<script type="text/javascript" th:src="@{/js/home.js}"></script>
 </body>
 </html>

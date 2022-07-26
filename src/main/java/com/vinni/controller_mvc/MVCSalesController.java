@@ -3,6 +3,7 @@ package com.vinni.controller_mvc;
 import com.vinni.controller_mvc.request.SaleFilterRequestDTO;
 import com.vinni.entity.City;
 import com.vinni.entity.State;
+import com.vinni.service.CityService;
 import com.vinni.service.SalesService;
 import com.vinni.service.StateService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,8 @@ public class MVCSalesController {
 
     private final SalesService salesService;
     private final StateService stateService;
+
+    private final CityService cityService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -56,12 +59,16 @@ public class MVCSalesController {
     private void validateStates(Model model){
         List<State> stateList = stateService.retrieveAllStates();
         for(State state : stateList){
-            log.info("==== State: " + state.getStateName() + " - " + state.getCities().stream().map(City::getCityName).collect(Collectors.joining(", ")));
+            log.info("==== State: " + state.getStateName() + " - " +
+                    state.getCities().stream().map(City::getCityName).collect(Collectors.joining(", ")));
         }
         model.addAttribute("stateList", stateList);
 
         //TODO: Add the states and cities to the Model Map<String, Set<String>>
         // User this method in wherever places that needs the relationship for filtering
+    }
+
+
+
 
     }
-}

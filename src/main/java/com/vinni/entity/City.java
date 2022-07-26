@@ -1,8 +1,10 @@
 package com.vinni.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "CITY")
@@ -20,8 +22,8 @@ public class City {
     @Column(name = "CITY_NAME")
     private String cityName;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "STATE_NO")
     private State state;
-
 }
